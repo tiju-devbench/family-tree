@@ -44,3 +44,33 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+*.swp
+*.*~
+project.lock.json
+.DS_Store
+*.pyc
+
+# Visual Studio Code
+#.vscode
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+projects/family-tree-API/[Dd]ebug/
+projects/family-tree-API/[Dd]ebugPublic/
+projects/family-tree-API/[Rr]elease/
+projects/family-tree-API/[Rr]eleases/
+projects/family-tree-API/x64/
+projects/family-tree-API/x86/
+projects/family-tree-API/build/
+projects/family-tree-API/bld/
+projects/family-tree-API/[Bb]in/
+projects/family-tree-API/[Oo]bj/
+projects/family-tree-API/msbuild.log
+projects/family-tree-API/msbuild.err
+projects/family-tree-API/msbuild.wrn
