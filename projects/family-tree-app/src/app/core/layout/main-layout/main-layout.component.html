@@ -1,56 +1,24 @@
-  <mat-toolbar color="primary">
-    FamilyTree App
-  
-   <!--   -->
-  
-    <button mat-flat-button color="primary" routerLink="home" routerLinkActive="active">Home</button>
-    <button mat-flat-button color="primary" routerLink="admin" routerLinkActive="active">Admin</button>
+<mat-toolbar color="primary">
+  FamilyTree App
 
-    <span class="spacer"></span>
+ <!--   -->
 
-    <div ngClass="login-container-toolbar" fxHide fxShow.md="true" fxShow.lg="true" fxShow.xl="true"
-    fxLayout="row">
-    <form #ToolbarLoginForm="ngForm">
-      <mat-form-field appearance="fill" ngClass="login-form-field">
-        <mat-label >Username</mat-label>
-        <input matInput [(ngModel)]="">
-        <button mat-icon-button matSuffix>
-        <mat-icon>face</mat-icon>
-        </button>
-      </mat-form-field>
-            <mat-form-field appearance="fill">
-        <mat-label >Password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'">
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-      </mat-form-field>
-      <button mat-raised-button ngClass="login-button-toolbar">Login</button>
-    </form>
-    </div>
-  </mat-toolbar>
+  <button mat-flat-button color="primary" routerLink="home" routerLinkActive="active">Home</button>
+  <button mat-flat-button color="primary" routerLink="admin" routerLinkActive="active">Admin</button>
+  <button *ngIf="loggedIn()" mat-flat-button color="primary" (click)="logOut()">Logout</button>
+  <span class="spacer"></span>
 
-  <div ngClass="login-container-center" fxShow fxHide.md="true" fxHide.lg="true" fxHide.xl="true" 
-          fxLayout="column" fxLayoutAlign="center center">
-    <form #CenterLoginForm="ngForm">
-    <mat-form-field appearance="fill" class="login-form-field">
-      <mat-label >Username</mat-label>
-      <input matInput>
-      <button mat-icon-button matSuffix>
-      <mat-icon>face</mat-icon>
-      </button>
-    </mat-form-field>
-          <mat-form-field appearance="fill">
-      <mat-label >Password</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'">
-      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-    </mat-form-field>
-    <button mat-raised-button color="primary">Login</button>
-    </form>
-  </div> 
+  <div ngClass="login-container-toolbar" fxHide fxShow.md="true" fxShow.lg="true" fxShow.xl="true"
+  fxLayout="row">
+    <alome-topnav-login *ngIf="!loggedIn()" (loginModel)="login($event)"></alome-topnav-login>
+    <span *ngIf="loggedIn()"><p>Welcome User!</p></span>
+  </div>
+</mat-toolbar>
 
-  <main>
-    <router-outlet></router-outlet>
-  </main>
+<div fxShow fxHide.md="true" fxHide.lg="true" fxHide.xl="true">
+    <alome-pagecenter-login *ngIf="!loggedIn()" (loginModel)="login($event)"></alome-pagecenter-login>
+</div>
+
+<main>
+  <router-outlet></router-outlet>
+</main>

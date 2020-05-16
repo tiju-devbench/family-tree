@@ -1,31 +1,16 @@
 .spacer {
     flex: 1 0 auto;
   }
-  
+
   button {
     margin: 0 10px;
-  
+
     &.active {
       filter: brightness(120%);
     }
   }
-  
+
   main {
     padding: 20px 20%;
   }
 
-  .login-container-toolbar  {
-    margin-top: 15px;
-  }
-  .login-container-center  {
-    min-height: 400px;
-  }
-  .login-button-toolbar  {
-    margin: .75em 0 1.75em 0;
-  }
-
-  // Material Components
-  mat-form-field.mat-form-field {
-    font-size: 14px;
-    padding: .25rem;
-  }
