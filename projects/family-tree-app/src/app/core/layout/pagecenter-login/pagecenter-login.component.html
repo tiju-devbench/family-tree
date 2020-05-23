@@ -1,20 +1,42 @@
 <form #CenterLoginForm="ngForm" (ngSubmit)="login()">
-  <div ngClass="login-container-center"
-      fxLayout="column" fxLayoutAlign="center center">
-<mat-form-field appearance="fill" class="login-form-field">
-  <mat-label >Username</mat-label>
-  <input matInput required name="username" [(ngModel)]="model.username">
-  <button mat-icon-button matSuffix>
-  <mat-icon>face</mat-icon>
-  </button>
-</mat-form-field>
-      <mat-form-field appearance="fill">
-  <mat-label >Password</mat-label>
-  <input matInput required name="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="model.password">
-  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-  </button>
-</mat-form-field>
-<button mat-raised-button fxFlexAlign="center" [disabled]="!CenterLoginForm.valid" color="primary">Login</button>
+  <div
+    ngClass="login-container-center"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+  >
+    <mat-form-field appearance="fill" class="login-form-field">
+      <mat-label>Username</mat-label>
+      <input matInput required name="username" [(ngModel)]="model.username" />
+      <button mat-icon-button matSuffix>
+        <mat-icon>face</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        required
+        name="password"
+        [type]="hide ? 'password' : 'text'"
+        [(ngModel)]="model.password"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      fxFlexAlign="center"
+      [disabled]="!CenterLoginForm.valid"
+      color="primary"
+    >
+      Login
+    </button>
   </div>
 </form>

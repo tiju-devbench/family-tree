@@ -1,4 +1,3 @@
-import { AuthService } from './../../../../../../_services/auth.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -10,7 +9,7 @@ export class PagecenterLoginComponent implements OnInit {
   @Output() loginModel = new EventEmitter();
   model: any = {};
   hide = true;
-  constructor(private authService: AuthService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

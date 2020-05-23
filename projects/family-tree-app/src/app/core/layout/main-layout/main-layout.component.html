@@ -1,24 +1,73 @@
-<mat-toolbar color="primary">
-  FamilyTree App
+<div fxLayout="column" fxLayoutAlign="center space-between">
+  <header>
+    <mat-toolbar color="primary">
+      FamilyTree App
 
- <!--   -->
+      <!--   -->
 
-  <button mat-flat-button color="primary" routerLink="home" routerLinkActive="active">Home</button>
-  <button mat-flat-button color="primary" routerLink="admin" routerLinkActive="active">Admin</button>
-  <button *ngIf="loggedIn()" mat-flat-button color="primary" (click)="logOut()">Logout</button>
-  <span class="spacer"></span>
+      <button
+        mat-flat-button
+        color="primary"
+        routerLink="home"
+        routerLinkActive="active"
+      >
+        Home
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        routerLink="admin"
+        routerLinkActive="active"
+      >
+        Admin
+      </button>
+      <button
+        *ngIf="loggedIn()"
+        mat-flat-button
+        color="primary"
+        (click)="logOut()"
+      >
+        Logout
+      </button>
+      <span class="spacer"></span>
 
-  <div ngClass="login-container-toolbar" fxHide fxShow.md="true" fxShow.lg="true" fxShow.xl="true"
-  fxLayout="row">
-    <alome-topnav-login *ngIf="!loggedIn()" (loginModel)="login($event)"></alome-topnav-login>
-    <span *ngIf="loggedIn()"><p>Welcome User!</p></span>
+      <div
+        ngClass="login-container-toolbar"
+        fxHide
+        fxShow.md="true"
+        fxShow.lg="true"
+        fxShow.xl="true"
+        fxLayout="row"
+      >
+        <alome-topnav-login
+          *ngIf="!loggedIn()"
+          (loginModel)="login($event)"
+        ></alome-topnav-login>
+        <span *ngIf="loggedIn()"><p>Welcome User!</p></span>
+      </div>
+    </mat-toolbar>
+  </header>
+  <div>
+    <alome-register
+      *ngIf="!loggedIn() && !loginMode"
+      (registerModel)="register($event)"
+    ></alome-register>
   </div>
-</mat-toolbar>
 
-<div fxShow fxHide.md="true" fxHide.lg="true" fxHide.xl="true">
-    <alome-pagecenter-login *ngIf="!loggedIn()" (loginModel)="login($event)"></alome-pagecenter-login>
+  <div fxShow="loginMode" fxHide.md="true" fxHide.lg="true" fxHide.xl="true">
+    <alome-pagecenter-login
+      *ngIf="!loggedIn() && loginMode"
+      (loginModel)="login($event)"
+    ></alome-pagecenter-login>
+  </div>
+
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer fxShow fxHide.md="true" fxHide.lg="true" fxHide.xl="true" fxFlexOffset="auto" (click)="toggleLoginMode()" >
+    <div fxLayoutAlign="center end">
+      <h2>{{footerText}}</h2>
+    </div>
+  </footer>
 </div>
-
-<main>
-  <router-outlet></router-outlet>
-</main>

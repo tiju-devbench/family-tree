@@ -8,9 +8,10 @@ import { MaterialModule } from '../material/material.module';
 import { FormsModule } from '@angular/forms';
 import { TopnavLoginComponent } from './layout/topnav-login/topnav-login.component';
 import { PagecenterLoginComponent } from './layout/pagecenter-login/pagecenter-login.component';
+import { RegisterComponent } from './layout/register/register.component';
 
 @NgModule({
-  declarations: [MainLayoutComponent, TopnavLoginComponent, PagecenterLoginComponent],
+  declarations: [MainLayoutComponent, TopnavLoginComponent, PagecenterLoginComponent, RegisterComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

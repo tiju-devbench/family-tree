@@ -7,11 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-layout.component.scss']
 })
 export class MainLayoutComponent implements OnInit {
-
+  footerText = "Login";
+  loginMode = false;
   hide = true;
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  toggleLoginMode(){
+    this.loginMode = !this.loginMode;
+    this.footerText = this.loginMode? "Cancel": "Login";
   }
 
   login(model: any){
@@ -21,6 +27,16 @@ export class MainLayoutComponent implements OnInit {
       },
       error=>{
         console.log('Failed to login')
+      });
+  }
+
+  register(model: any){
+    this.authService.register(model)
+      .subscribe(next => {
+        console.log('Registered in successfully');
+      },
+      error=>{
+        console.log('Failed to Register')
       });
   }
 

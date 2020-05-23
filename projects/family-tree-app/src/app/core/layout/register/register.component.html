@@ -1,0 +1,48 @@
+<div
+  ngClass="register-container-center"
+  *ngIf="!registerMode"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+>
+  <h1>Welcome to FamTree</h1>
+  <p>Build a family tree and trace your legacy!</p>
+  <button
+    mat-raised-button
+    fxFlexAlign="left"
+    color="primary"
+    (click)="registerToggle()"
+  >
+    Register
+  </button>
+</div>
+
+<form (ngSubmit)="register()" #RegisterForm="ngForm" *ngIf="registerMode">
+  <div
+    ngClass="register-container-center"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+  >
+    <h1>Sign up</h1>
+    <mat-form-field appearance="fill">
+      <mat-label >Username</mat-label>
+      <input matInput required name="username" [(ngModel)]="model.username">
+    </mat-form-field>
+          <mat-form-field appearance="fill">
+      <mat-label >Password</mat-label>
+      <input matInput required name="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="model.password">
+    </mat-form-field>
+
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between space-between"
+      fxLayoutGap="10px"
+    >
+      <button mat-raised-button color="primary" [disabled]="!RegisterForm.valid"(click)="registerToggle()">
+        Register
+      </button>
+      <button mat-stroked-button (click)="cancelRegisterMode(false)">
+        Cancel
+      </button>
+    </div>
+  </div>
+</form>
