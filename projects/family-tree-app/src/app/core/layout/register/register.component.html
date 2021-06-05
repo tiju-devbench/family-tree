@@ -24,8 +24,16 @@
   >
     <h1>Sign up</h1>
     <mat-form-field appearance="fill">
+      <mat-label >First Name</mat-label>
+      <input matInput required name="fname" [(ngModel)]="model.firstname">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label >Last Name</mat-label>
+      <input matInput required name="lname" [(ngModel)]="model.lastname">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
       <mat-label >Username</mat-label>
-      <input matInput required name="username" [(ngModel)]="model.username">
+      <input matInput required name="username" [(ngModel)]="model.email">
     </mat-form-field>
           <mat-form-field appearance="fill">
       <mat-label >Password</mat-label>
@@ -37,7 +45,7 @@
       fxLayoutAlign="space-between space-between"
       fxLayoutGap="10px"
     >
-      <button mat-raised-button color="primary" [disabled]="!RegisterForm.valid"(click)="registerToggle()">
+      <button mat-raised-button [disabled]="!RegisterForm.valid" (click)="registerToggle()">
         Register
       </button>
       <button mat-stroked-button (click)="cancelRegisterMode(false)">

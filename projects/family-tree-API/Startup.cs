@@ -16,6 +16,11 @@ using family_tree_API.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Net;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using family_tree_API.Helpers;
+using AutoMapper;
 
 namespace family_tree_API
 {
@@ -34,26 +39,31 @@ namespace family_tree_API
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
             services.AddCors();
-            services.AddScoped<IAuthRepository,AuthRepository>();
+            services.AddAutoMapper(typeof(AuthRepository).Assembly);
+            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IFamilyRepository, FamilyRepository>();
+            services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                    .AddJwtBearer(options => {
+                    .AddJwtBearer(options =>
+                    {
                         options.TokenValidationParameters = new TokenValidationParameters
                         {
                             ValidateIssuerSigningKey = true,
                             IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
                             ValidateIssuer = false,
-                            ValidateAudience =  false
+                            ValidateAudience = false
                         };
                     });
         }
         public void ConfigureDevelopmentServices(IServiceCollection services)
-        {          
-                
+        {
+
             ConfigureServices(services);
         }
 
         public void ConfigureProductionServices(IServiceCollection services)
-        {            
+        {
 
             ConfigureServices(services);
         }
@@ -65,6 +75,23 @@ namespace family_tree_API
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler(builder =>
+                {
+                    builder.Run(async context =>
+                    {
+                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                        var error = context.Features.Get<IExceptionHandlerFeature>();
+                        if (error != null)
+                        {
+                          context.Response.AddApplicationError(error.Error.Message);
+                            await context.Response.WriteAsync(error.Error.Message);
+                        }
+                    });
+                }
+                );
+            }
 
             //app.UseHttpsRedirection();
 
@@ -72,12 +99,12 @@ namespace family_tree_API
 
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseCors(X509EncryptingCredentials=> X509EncryptingCredentials.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());          
-            
+            app.UseCors(X509EncryptingCredentials => X509EncryptingCredentials.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-               // endpoints.MapFallbackToController("Index", "Fallback");
+                // endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
     }

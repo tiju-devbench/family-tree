@@ -1,4 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
-//@import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import '../../../node_modules/alertifyjs/build/css/alertify.min.css';
+@import '../../../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
+// Import _variables.css to the component's sass file where you want to use it.
+@import "_variables.scss";
+.selected {
+  background-color: $accent;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  color: $primary;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  background-image: url('/assets/images/Endless-Constellation.svg');
+}
+
+div.mat-form-field-wrapper { margin-right: 0.5em !important }
+
+
+div.mat-form-field-flex {     background-color: rgba(0,0,0,.4) !important }
+

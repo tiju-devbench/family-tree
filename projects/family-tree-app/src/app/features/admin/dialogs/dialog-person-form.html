@@ -1,0 +1,102 @@
+<form #PersonForm="ngForm">
+  <mat-vertical-stepper [linear]="data.isLinear" #stepper>
+    <mat-step>
+      <ng-template matStepLabel>Personal details</ng-template>
+
+      <mat-card>
+        <mat-file-upload [labelText]="'Select a display image'" [selectButtonText]="'Choose File(s)'"
+          [uploadButtonText]="'Submit'" [allowMultipleFiles]="false" [showUploadButton]="false"
+          [acceptedTypes]="'.png, .jpg, .jpeg'"
+          [customSvgIcon]="'close_custom'"
+          (selectedFilesChanged)="onSelectedFilesChanged($event)">
+        </mat-file-upload>
+      </mat-card>
+
+      <mat-form-field appearance="standard">
+        <mat-label>First Name</mat-label>
+        <input
+          matInput
+          required
+          name="firstname"
+          [(ngModel)]="data.person.firstName"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Last Name</mat-label>
+        <input
+          matInput
+          required
+          name="lastname"
+          [(ngModel)]="data.person.lastName"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Gender</mat-label>
+        <mat-select [(ngModel)]="data.person.gender" name="gender
+        ">
+          <mat-option value="Male">Male</mat-option>
+          <mat-option value="Female">Female</mat-option>
+          <mat-option value="NotSpecified">Not Specified</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Contact deatails</ng-template>
+      <mat-form-field appearance="standard">
+        <mat-label>Contact Name</mat-label>
+        <input
+          matInput
+          name="contactname"
+          [(ngModel)]="data.person.contact.Name"
+          [value]="data.person.firstName+' '+data.person.lastName"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Mobile</mat-label>
+        <input
+          matInput
+          name="mobile"
+          [(ngModel)]="data.person.contact.Mobile"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Work Phone</mat-label>
+        <input
+          matInput
+          type="tel"
+          name="workphone"
+          [(ngModel)]="data.person.contact.WorkPhone"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          name="email"
+          [(ngModel)]="data.person.contact.Email"
+          [formControl]="data.emailFormControl"
+        />
+        <mat-error *ngIf="data.emailFormControl.hasError('email')">
+          Please enter a valid email address
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Website</mat-label>
+        <input
+          matInput
+          name="website"
+          [(ngModel)]="data.person.contact.Website"
+        />
+      </mat-form-field>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-button (click)="dialogRef.close(data)">Add person</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+</form>

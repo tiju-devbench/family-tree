@@ -1,16 +1,21 @@
+@import "../../../../_variables.scss";
 .spacer {
-    flex: 1 0 auto;
-  }
+  flex: 1 0 auto;
+}
 
-  button {
-    margin: 0 10px;
+button {
+  margin: 0 10px;
 
-    &.active {
-      filter: brightness(120%);
-    }
+  &.active {
+    filter: brightness(120%);
   }
+}
 
-  main {
-    padding: 20px 20%;
-  }
+main {
+  padding: 20px 20%;
+}
+
+
+
+
 

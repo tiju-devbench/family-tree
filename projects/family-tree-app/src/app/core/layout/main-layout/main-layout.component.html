@@ -1,7 +1,7 @@
 <div fxLayout="column" fxLayoutAlign="center space-between">
   <header>
     <mat-toolbar color="primary">
-      FamilyTree App
+      FamTree App
 
       <!--   -->
 
@@ -14,6 +14,7 @@
         Home
       </button>
       <button
+        *ngIf="isLoggedIn"
         mat-flat-button
         color="primary"
         routerLink="admin"
@@ -22,7 +23,7 @@
         Admin
       </button>
       <button
-        *ngIf="loggedIn()"
+        *ngIf="isLoggedIn"
         mat-flat-button
         color="primary"
         (click)="logOut()"
@@ -40,32 +41,32 @@
         fxLayout="row"
       >
         <alome-topnav-login
-          *ngIf="!loggedIn()"
+          *ngIf="!isLoggedIn"
           (loginModel)="login($event)"
         ></alome-topnav-login>
-        <span *ngIf="loggedIn()"><p>Welcome User!</p></span>
+        <span *ngIf="isLoggedIn"><p>Welcome {{loggedInMember.name}}!</p></span>
       </div>
     </mat-toolbar>
   </header>
   <div>
     <alome-register
-      *ngIf="!loggedIn() && !loginMode"
+      *ngIf="!isLoggedIn && !loginMode"
       (registerModel)="register($event)"
     ></alome-register>
   </div>
 
   <div fxShow="loginMode" fxHide.md="true" fxHide.lg="true" fxHide.xl="true">
     <alome-pagecenter-login
-      *ngIf="!loggedIn() && loginMode"
+      *ngIf="!isLoggedIn && loginMode"
       (loginModel)="login($event)"
     ></alome-pagecenter-login>
   </div>
 
-  <main>
+  <main *ngIf="isLoggedIn">
     <router-outlet></router-outlet>
   </main>
 
-  <footer fxShow fxHide.md="true" fxHide.lg="true" fxHide.xl="true" fxFlexOffset="auto" (click)="toggleLoginMode()" >
+  <footer fxShow fxHide.md="true" fxHide.lg="true" fxHide.xl="true" fxFlexOffset="auto" (click)="toggleLoginMode()" *ngIf="!isLoggedIn">
     <div fxLayoutAlign="center end">
       <h2>{{footerText}}</h2>
     </div>

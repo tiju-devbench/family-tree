@@ -1,0 +1,49 @@
+<mat-accordion class="family-headers-align" multi>
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        My Family
+      </mat-panel-title>
+      <mat-panel-description *ngIf="!panelOpenState"><span>Click here to add...</span>
+        <mat-icon>account_tree</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <form (ngSubmit)="addFamily()" #AddFamilyForm="ngForm">
+    <div fxLayout="row" fxLayoutGap="25%">
+      <div fxFlexOrder="1">
+        <div fxLayout="column">
+          <mat-form-field>
+            <mat-label>Family name</mat-label>
+            <input matInput />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Address</mat-label>
+            <input matInput />
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxFlexOrder="2">
+        <div fxLayout="column" fxFlexAlign="space-around">
+          <div>
+            Parents:
+            <span *ngFor="let member of family.Members"><span *ngIf="family.Members.length > 1"> | </span>{{member.firstName}}</span>
+            <button mat-icon-button (click)="openPersonFormDialog()" [disabled]="dialogOpenState"><mat-icon>person_add</mat-icon></button>
+          </div>
+
+          <div>
+            Children:<button mat-icon-button (click)="openPersonFormDialog()" [disabled]="dialogOpenState"><mat-icon>person_add</mat-icon></button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <button mat-raised-button color="primary" [disabled]="!AddFamilyForm.valid">
+      Add Family
+    </button>
+    </form>
+  </mat-expansion-panel>
+</mat-accordion>
+
+
